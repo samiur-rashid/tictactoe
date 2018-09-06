@@ -127,7 +127,8 @@ public class TicTacToe {
 		TicTacToe game = new TicTacToe();
 		game.Fill();
 		int Winner = 0;
-		while (Winner == 0) {
+		int timesPlayed = 0;
+		while (Winner == 0 && timesPlayed <= 8) {
 			Scanner keyboard = new Scanner(System.in);
 			System.out.println("'X', choose your row: ");
 			int row = keyboard.nextInt();
@@ -135,18 +136,24 @@ public class TicTacToe {
 			int column = keyboard.nextInt();
 			game.Move(row, column, 'X');
 			game.Display();
+			timesPlayed++;
 			Winner = game.Winner();
 		
-			if (Winner == 0) {
+			if (Winner == 0 && timesPlayed <= 8) {
 				System.out.println("'O', choose your row: ");
 				row = keyboard.nextInt();
 				System.out.println("'O', choose your column: ");
 				column = keyboard.nextInt();
 				game.Move(row, column, 'O');
 				game.Display();
+				timesPlayed++;
 				Winner = game.Winner();
 			}
 
+		}
+		
+		if (timesPlayed > 8 && Winner == 0) {
+			System.out.println("It's a tie!");
 		}
 	}
 
